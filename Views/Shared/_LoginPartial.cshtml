@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _SignInManager
+@inject UserManager<IdentityUser> UserManager
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Cart" asp-action="GetUserCart">
+            <span id="cartCount" class="badge text-bg-info">0</span>
+            <i class="bi bi-cart text-white"></i>
+        </a>
+    </li>
+@if (_SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Hello @User.Identity?.Name!
+            @if (@User.IsInRole("Admin"))
+            {
+                <span>(Admin)</span>
+            }
+            </a>
+        <div class="dropdown-menu" style="right:auto;">
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
+            <a class="dropdown-item" asp-action="GetUserOrders" asp-controller="Order">My Orders</a>
+            <div class="dropdown-divider"></div>
+            <div>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="dropdown-item" type="button">Logout</button>
+                </form>
+            </div>
+        </div>
+    </li>
+    
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+    @if (_SignInManager.IsSignedIn(User))
+    {
+        <span! id="isSignedIn" display="none"></span>
+    }
+</ul>

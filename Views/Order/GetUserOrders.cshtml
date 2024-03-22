@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "My Orders";
+}
+<div style="width:100%" class="mt-2">
+    <h4 >My Orders</h4>
+    @if (Model != null && Model.Count() > 0)
+    {
+        @foreach (var order in Model)
+        {       
+            <table class="table table-bordered mt-4">
+                <tr class="table-primary">
+                    <th colspan="4">Order Date</th>
+                    <th>Order Status</th>
+                </tr>
+                <tr>
+                    <td colspan="4">@order.CreatedDate</td>
+                    <td>@order.OrderStatus.StatusName</td>
+                </tr>
+                <tr class ="table-active">
+                    <th>Book</th>
+                    <th>Image</th>
+                    <th>Genre</th>
+                    <th>Unit Price(USD)</th>
+                    <th>Total Price</th>
+                </tr>
+                 @foreach(var orderD in order.OrderDetails)
+                 {
+                    <tr>
+                        <td>@orderD.Book.BookName</td>
+                        <td>
+                            @if (string.IsNullOrEmpty(orderD.Book.Image))
+                            {
+                                <img src="~/Assets/Images/Books/NoImage.png" style="width:80px;height:100px" />
+                            }
+                            else
+                            {
+                                <img src="~/Assets/Images/Books/@orderD.Book.Image" style="width:80px;height:100px" />
+                            }
+                        </td>
+                        <td>@orderD.Book.Genre.GenreName</td>
+                        <td>@orderD.Book.Price X @orderD.Quantity</td>
+                        <td>@(orderD.Book.Price * orderD.Quantity)$</td>
+                    </tr>
+                  }
+                <tr class ="table-active">
+                    <td colspan="5">
+                        <h5>Total: $@(order.OrderDetails.Select(item => item.Book.Price * item.Quantity).Sum()) </h5>
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+    else
+    {
+        <h5>No orders</h5>
+    }
+    <a asp-action="Index" asp-controller="Home" class="btn btn-primary ">Back</a>
+</div>

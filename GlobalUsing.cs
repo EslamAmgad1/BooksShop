@@ -1,0 +1,13 @@
+﻿global using BooksShop;
+global using BooksShop.Data;
+global using BooksShop.Models;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using BooksShop.constant;
+global using System.ComponentModel.DataAnnotations;
+global using BooksShop.Repository;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using BooksShop.ViewModels;
+global using System.Diagnostics;

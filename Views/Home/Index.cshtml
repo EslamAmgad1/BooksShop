@@ -1,0 +1,82 @@
+﻿@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (!Model.Books.Any())
+{
+    <div class="alert  alert-warning mt-5">
+        <h4 class="alert-heading">No Books!</h4>
+        <p class="mb-0">No Books are Available.</p>
+    </div>
+}
+else
+{
+<div class="my-3">
+    <form class="row row-cols-lg-auto g-3 align-items-center" asp-action="Index">
+        <div class="col-12">
+            <label class="visually-hidden" asp-for="GenreFilter">Genres</label>
+            <select class="form-select" asp-for="GenreFilter">
+                <option value="0">Genre</option>
+                @foreach(var genre in Model.Genres)
+                {
+                    <option value="@genre.Id">@genre.GenreName</option>
+                }
+            </select>
+        </div>
+        <div class="col-12">
+            <label class="visually-hidden" asp-for="SearchTitle">Search by title</label>
+            <div class="input-group">
+                <div class="input-group-text"></div>
+                <input type="text" class="form-control" asp-for="SearchTitle" placeholder="Search by title">
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a asp-action="Index" class="btn btn-dark">Reset</a>
+        </div>
+    </form>
+</div>
+
+
+<div class="row mt-4 align-items-center">
+    @foreach(var book in Model.Books)
+    {
+        <div class="col-lg-3 col-md-4">
+            <div class="card mb-3">
+                <img src="~/Assets/Images/Books/@book.Image" class="card-img-top" alt="BookCover" width="100%" height="200px">
+                <div class="card-body">
+                    <h4 class="card-title">@book.BookName</h4>
+                    <p class="card-text">
+                        <b>Author: </b>@book.AuthorName<br/>
+                        <b>Genre: </b>@book.Genre.GenreName<br/>
+                        <b>Price: </b>$@(book.Price.ToString())
+                    </p>
+                    <button type="button" onclick="add(@book.BookId)" class="btn btn-primary">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}
+@section Scripts{
+    <script>
+        async function add(bookId) {
+            var usernameEl = document.getElementById("isSignedIn");
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+            }
+            try {
+                var response = await fetch(`/Cart/AddItem?bookId=${bookId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                    window.location.href = "#cartCount";
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+}
