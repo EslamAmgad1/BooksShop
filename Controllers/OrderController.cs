@@ -17,9 +17,9 @@
             }
             return RedirectToAction("Index", "Home");
         }
-        public IActionResult GetUserOrders()
+        public async Task<IActionResult> GetUserOrders()
         {
-            var orders = _orderRepository.GetAllUserOrdersWithDetails();
+            var orders = await _orderRepository.GetAllUserOrdersWithDetails();
             return View(orders);
         }
     }
