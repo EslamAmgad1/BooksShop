@@ -1,4 +1,4 @@
-﻿namespace BooksShop.Repository
+namespace BooksShop.Repository
 {
     public class OrderRepository : IOrderRepository
     {
@@ -50,15 +50,15 @@
 
         }
 
-        public IEnumerable<Order> GetAllUserOrdersWithDetails()
+        public async Task<IEnumerable<Order>> GetAllUserOrdersWithDetails()
         {
             var userId = GetUserId() ?? throw new Exception("User is not Logined");
-            var orders = _context.Orders
+            var orders = await _context.Orders
                                  .Include(o=>o.OrderStatus)
                                  .Include(o=>o.OrderDetails)
                                  .ThenInclude(od=>od.Book)
                                  .ThenInclude(b=>b.Genre)
-                                 .Where(o=> o.UserId == userId).AsNoTracking().ToList();
+                                 .Where(o=> o.UserId == userId).AsNoTracking().ToListAsync();
             return orders;
 
         }
