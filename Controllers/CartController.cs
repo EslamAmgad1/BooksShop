@@ -1,4 +1,4 @@
-﻿namespace BooksShop.Controllers
+namespace BooksShop.Controllers
 {
     [Authorize]
     public class CartController : Controller
