@@ -10,12 +10,10 @@
         [MaxLength(40)]
         public string? AuthorName { get; set; }
 
-        [Required]  
         public double Price { get; set; }
 
         public string? Image {  get; set; }
 
-        [Required]
         public int GenreId { get; set; }
 
         public Genre Genre { get; set; } = default!;
