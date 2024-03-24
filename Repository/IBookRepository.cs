@@ -1,9 +1,9 @@
-﻿namespace BooksShop
+namespace BooksShop
 {
     public interface IBookRepository
     {
-        public IEnumerable<Book> GetAllWithGenre();
-        public IEnumerable<Book> GetAllByBookTitle(string title = "");
-        public IEnumerable<Book> GetAllByBookNameAndGenreId(int GenreFilter = 0, string SearchTitle = "");
+        public Task<IEnumerable<Book>> GetAllWithGenre();
+        public Task<IEnumerable<Book>> GetAllByBookTitle(string title = "");
+        public Task<IEnumerable<Book>> GetAllByBookNameAndGenreId(int GenreFilter = 0, string SearchTitle = "");
     }
 }
