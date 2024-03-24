@@ -1,4 +1,4 @@
-﻿namespace BooksShop.Repository
+namespace BooksShop.Repository
 {
     public class GenreRepository : IGenreRepository
     {
@@ -8,9 +8,9 @@
             _context = context;
         }
 
-        public IEnumerable<Genre> GetAll()
+        public async Task <IEnumerable<Genre>> GetAll()
         {
-            return _context.Genres.OrderBy(g=>g.GenreName).AsNoTracking().ToList(); 
+            return await _context.Genres.OrderBy(g=>g.GenreName).AsNoTracking().ToListAsync(); 
         }
     }
 }
