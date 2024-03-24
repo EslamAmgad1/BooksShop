@@ -10,9 +10,11 @@ namespace BooksShop.Controllers
             _genreRepository = genreRepository;
         }
 
-        public IActionResult Index(int GenreFilter = 0 , string SearchTitle = "")
+        public async Task<IActionResult> Index(int GenreFilter = 0 , string SearchTitle = "")
         {
-            var displayBooks = _bookRepository.GetAllByBookNameAndGenreId(GenreFilter, SearchTitle).Select(b => new DisplayBooksViewModel
+            var Books = await _bookRepository.GetAllByBookNameAndGenreId(GenreFilter, SearchTitle);
+
+            var displayBooks = Books.Select(b => new DisplayBooksViewModel
             {
                 BookId = b.Id,
                 BookName = b.BookName,
@@ -25,7 +27,7 @@ namespace BooksShop.Controllers
             HomeIndexViewModel model = new()
             {
                 Books = displayBooks,
-                Genres = _genreRepository.GetAll(),
+                Genres = await _genreRepository.GetAll(),
                 GenreFilter = GenreFilter,
                 SearchTitle = SearchTitle
             };
