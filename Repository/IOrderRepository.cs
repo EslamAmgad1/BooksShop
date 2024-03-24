@@ -3,6 +3,6 @@
     public interface IOrderRepository
     {
         public Task<bool> Create();
-        public IEnumerable<Order> GetAllUserOrdersWithDetails();
+        public Task<IEnumerable<Order>> GetAllUserOrdersWithDetails();
     }
 }
