@@ -2,6 +2,6 @@
 {
     public interface IGenreRepository
     {
-        public IEnumerable<Genre> GetAll();
+        public Task<IEnumerable<Genre>> GetAll();
     }
 }
