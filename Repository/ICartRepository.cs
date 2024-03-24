@@ -1,4 +1,4 @@
-﻿namespace BooksShop.Repository
+namespace BooksShop.Repository
 {
     public interface ICartRepository
     {
