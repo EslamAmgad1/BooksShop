@@ -1,9 +1,9 @@
 # BooksShop
 
-This project is a Books Shop application with Cart Functionality built using .Net 8, Repository Design Pattern, Dependency Injection, EF 8, SQL Server, Microsoft Identity, Filtering, and Searching functionalities.
+BooksShop is an ASP.NET Core MVC project that includes Cart Functionality using .NET 8, Repository Design Pattern, Dependency Injection, EF 8, SQL Server, Microsoft Identity, Filtering, and Searching functionalities.
 
 ## Technologies Used
-- .Net 8
+- .NET 8
 - Repository Design Pattern
 - Dependency Injection
 - EF 8
@@ -17,16 +17,16 @@ This project is a Books Shop application with Cart Functionality built using .Ne
 - Entity Framework (EF) for database interactions
 - SQL Server for data storage
 - Microsoft Identity for user authentication and authorization
-- Filtering and Searching functionalities for better user experience
+- Filtering and Searching functionalities for enhanced user experience
 
 ## Setup Instructions
 1. Clone the repository.
 2. Update the connection string in `appsettings.json` file.
 3. Run the database migrations using Entity Framework.
-4. Start the application and test the features including Cart Functionality using a tool like Postman.
+4. Start the application and explore the features including Cart Functionality using a web browser.
 
 ## Contribution Guidelines
-Feel free to contribute to this project by submitting a pull request or opening an issue.
+Contributions are welcome! Feel free to submit a pull request or open an issue.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
